@@ -3,7 +3,6 @@ Given an integer numRows, return the first numRows of Pascal's triangle.
 
 In Pascal's triangle, each number is the sum of the two numbers directly above it as shown:
 
-![image](https://user-images.githubusercontent.com/50901300/138521667-685f5010-0de1-4e2d-9b95-36749ccc0d36.png)
 Example 1:
 
 Input: numRows = 5
