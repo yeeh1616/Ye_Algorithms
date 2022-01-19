@@ -27,6 +27,7 @@ class Solution {
         for (int i = 1; i < n; i++) {
             int num = nums[i];
             if (num > second) {
+                // 这里返回的(first, second, num)不一定是递增的，但是结果一定是正确的。
                 return true;
             } else if (num > first) {
                 second = num;
