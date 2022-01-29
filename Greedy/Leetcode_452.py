@@ -1,4 +1,5 @@
 '''
+[与435题相同的解法]
 答案: https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/submissions/
 452. Minimum Number of Arrows to Burst Balloons
 
@@ -31,18 +32,28 @@ Explanation: The balloons can be burst by 2 arrows:
 - Shoot an arrow at x = 4, bursting the balloons [3,4] and [4,5].
 '''
 
-class Solution:
-    def findMinArrowShots(self, points: List[List[int]]) -> int:
-        
-        if not points:
-            return 0
-        
-        points.sort(key=lambda x:x[1])
-        pos = points[0][1]
-        ans = 1
-
-        for point in points:
-            if point[0] > pos:
-                pos = point[1]
-                ans += 1
-        return ans
+/**
+ * @param {number[][]} points
+ * @return {number}
+ */
+var findMinArrowShots = function(intervals) {
+  // 问题转换成求最多有几个区间不会重叠，剩下的就是至少需要去除的区间
+  if (!intervals.length) {
+    return 0;
+  }
+  // 按end升序排序
+  intervals.sort((a, b) => a[1] - b[1]);
+  const n = intervals.length;
+  // 至少应该有一个区间不相交
+  let count = 1;
+  // 排序后第一个区间就是x
+  let x_end = intervals[0][1];
+  for (let i = 1; i < n; ++i) {
+    if (intervals[i][0] > x_end) {
+      ++count;
+      // 更新x
+      x_end = intervals[i][1];
+    }
+  }
+  return count;
+};
