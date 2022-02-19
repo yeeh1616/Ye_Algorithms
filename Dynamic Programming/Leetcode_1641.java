@@ -48,3 +48,17 @@ class Solution {
         return dp[n][0]+dp[n][1]+dp[n][2]+dp[n][3]+dp[n][4];
     }
 }
+
+// 状态表可降到一维
+public static int countVowelStrings(int n) {
+     int dp[] = new int[6];
+     for (int i = 1; i <= 5; i++) {
+         dp[i] = 1;
+     }
+     for (int j = 2; j <= n; j++) {
+         for(int i=2;i<=5;i++){
+             dp[i]+=dp[i-1];
+         }
+     }
+     return dp[1]+dp[2]+dp[3]+dp[4]+dp[5];
+ }
