@@ -20,8 +20,9 @@ class Solution:
                 dp[i][j] = (zero, one)
                 res += one
         return res
-
+/*
 作者：here0009
 链接：https://leetcode-cn.com/problems/count-substrings-that-differ-by-one-character/solution/python-dong-tai-gui-hua-210000-by-here0009/
 来源：力扣（LeetCode）
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+*/
