@@ -1,74 +1,27 @@
-/*
-Given two strings s and t, find the number of ways you can choose a non-empty substring of s and replace a single character by a different character such that the resulting substring is a substring of t. In other words, find the number of substrings in s that differ from some substring in t by exactly one character.
+/*使用dp[i][j]记录s[:i], t[:j]的所有substring中，完全相同的substring和有一个差异的substring的个数
+遍历列表，dp[i][j]只与dp[i-1][j-1]相关。
+初始化时增加额外的一行与一列方便边界条件处理*/
 
-For example, the underlined substrings in "computer" and "computation" only differ by the 'e'/'a', so this is a valid way.
 
-Return the number of substrings that satisfy the condition above.
+class Solution:
+    def countSubstrings(self, s: str, t: str) -> int:
+        len_s, len_t = len(s), len(t)
+        dp = [[(0,0)]*(len_t+1) for _ in range(len_s+1)] 
+        # dp[i][j] = (m, n) means that for substrings that ends with s[i-1] and t[j-1] the there are m equals and n got one diff 
+        res = 0
+        for i in range(1, len_s+1):
+            for j in range(1, len_t+1):
+                zero, one = dp[i-1][j-1]
+                if s[i-1] == t[j-1]:
+                    zero += 1
+                else:
+                    one = zero + 1
+                    zero = 0
+                dp[i][j] = (zero, one)
+                res += one
+        return res
 
-A substring is a contiguous sequence of characters within a string.
-
- 
-
-Example 1:
-
-Input: s = "aba", t = "baba"
-Output: 6
-Explanation: The following are the pairs of substrings from s and t that differ by exactly 1 character:
-("aba", "baba")
-("aba", "baba")
-("aba", "baba")
-("aba", "baba")
-("aba", "baba")
-("aba", "baba")
-The underlined portions are the substrings that are chosen from s and t.
-​​Example 2:
-Input: s = "ab", t = "bb"
-Output: 3
-Explanation: The following are the pairs of substrings from s and t that differ by 1 character:
-("ab", "bb")
-("ab", "bb")
-("ab", "bb")
-​​​​The underlined portions are the substrings that are chosen from s and t.
-Example 3:
-Input: s = "a", t = "a"
-Output: 0
-Example 4:
-
-Input: s = "abe", t = "bbc"
-Output: 10
- 
-
-Constraints:
-
-1 <= s.length, t.length <= 100
-s and t consist of lowercase English letters only.
-*/
-
-class Solution {
-    public int countSubstrings(String s, String t) {
-        int ans=0;
-        for(int size=1;size<=Math.min(s.length(),t.length());size++){
-            List<String> l1=new ArrayList();
-            List<String> l2=new ArrayList();
-            for(int i=0;i<=s.length()-size;i++){l1.add(s.substring(i,i+size));}
-            for(int i=0;i<=t.length()-size;i++){l2.add(t.substring(i,i+size));}
-            for(String a:l1){
-                for(String b:l2){
-                    if(oneLetterDif(a,b)){ans++;}
-                }
-            }
-        }
-        return ans;
-    }
-    public boolean oneLetterDif(String a,String b){
-        if(a.equals(b)){return false;}
-        for(int i=0;i<a.length();i++){
-            if(a.charAt(i)!=b.charAt(i)){
-                for(int j=i+1;j<a.length();j++){
-                    if(a.charAt(j)!=b.charAt(j)){return false;}
-                }
-            }
-        }
-        return true;
-    }
-}
+作者：here0009
+链接：https://leetcode-cn.com/problems/count-substrings-that-differ-by-one-character/solution/python-dong-tai-gui-hua-210000-by-here0009/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
