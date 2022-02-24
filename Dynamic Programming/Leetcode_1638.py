@@ -1,6 +1,6 @@
-/*使用dp[i][j]记录s[:i], t[:j]的所有substring中，完全相同的substring和有一个差异的substring的个数
+'''使用dp[i][j]记录s[:i], t[:j]的所有substring中，完全相同的substring和有一个差异的substring的个数
 遍历列表，dp[i][j]只与dp[i-1][j-1]相关。
-初始化时增加额外的一行与一列方便边界条件处理*/
+初始化时增加额外的一行与一列方便边界条件处理'''
 
 
 class Solution:
@@ -20,9 +20,9 @@ class Solution:
                 dp[i][j] = (zero, one)
                 res += one
         return res
-/*
+'''
 作者：here0009
 链接：https://leetcode-cn.com/problems/count-substrings-that-differ-by-one-character/solution/python-dong-tai-gui-hua-210000-by-here0009/
 来源：力扣（LeetCode）
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-*/
+'''
