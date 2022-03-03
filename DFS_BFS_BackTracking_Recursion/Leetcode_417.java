@@ -37,3 +37,78 @@ class Solution {
     }
 }
 // https://leetcode-cn.com/problems/pacific-atlantic-water-flow/solution/shui-wang-gao-chu-liu-by-xiaohu9527-xxsx/
+
+
+
+// BFS
+class Solution {
+public:
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        int m=heights.size();
+        int n=heights[0].size();
+        
+        queue<pair<int,int>> q1;
+        queue<pair<int,int>> q2;
+
+        vector<pair<int,int>> dirs={{-1,0},{1,0},{0,-1},{0,1}};
+        //用来存放已经经过的单元格
+        vector<vector<int>> vis1(m,vector<int>(n,0));
+        vector<vector<int>> vis2(m,vector<int>(n,0));
+        //海洋旁边的单元格是一定可以流通的，存入队列中
+        for(int i=0;i<m;++i){
+            q1.push({i,0});
+            vis1[i][0]=1;
+            q2.push({i,n-1});
+            vis2[i][n-1]=1;
+        }
+        for(int j=0;j<n;++j){
+            q1.push({0,j});
+            vis1[0][j]=1;
+            q2.push({m-1,j});
+            vis2[m-1][j]=1;
+        }
+
+        while(!q1.empty()){
+            auto ind=q1.front();
+            q1.pop();
+            for(auto cur:dirs){
+                int x=ind.first+cur.first;
+                int y=ind.second+cur.second;
+                if(x>=0&&x<m&&y>=0&&y<n&&heights[x][y]>=heights[ind.first][ind.second]&&!vis1[x][y]){
+                    q1.push({x,y});
+                    vis1[x][y]=1;
+                }
+            }
+        }
+        while(!q2.empty()){
+            auto ind=q2.front();
+            q2.pop();
+            for(auto cur:dirs){
+                int x=ind.first+cur.first;
+                int y=ind.second+cur.second;
+                if(x>=0&&x<m&&y>=0&&y<n&&heights[x][y]>=heights[ind.first][ind.second]&&!vis2[x][y]){
+                    q2.push({x,y});
+                    vis2[x][y]=1;
+                }
+            }
+        }
+
+        vector<vector<int>> res;
+        for(int i=0;i<m;++i){
+            for(int j=0;j<n;++j){
+                if(vis1[i][j]==1&&vis2[i][j]==1){
+                    res.push_back({i,j});
+                }
+            }
+        }
+
+        return res;
+
+
+    }
+};
+
+作者：xiao-pu-tao-zhu
+链接：https://leetcode-cn.com/problems/pacific-atlantic-water-flow/solution/bfsni-liu-xun-zhao-by-xiao-pu-tao-zhu-25h2/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
