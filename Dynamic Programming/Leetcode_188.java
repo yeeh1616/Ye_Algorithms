@@ -1,5 +1,5 @@
 // DP
-
+// dp[i][j=7]=第i天的j状态的最大收益。七次交易=七种状态
 import kotlin.math.max
 
 class Solution {
