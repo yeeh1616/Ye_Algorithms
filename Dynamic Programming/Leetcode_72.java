@@ -1,4 +1,4 @@
-// 我是傻逼。。(你们都给我si。。)
+// 西巴！ 苏卡不列！ 发凡顾喽！ 波斯嘎哇斯涝！八嘎雅鹿！
 class Solution {
     public int minDistance(String word1, String word2) {
         int n1 = word1.length();
