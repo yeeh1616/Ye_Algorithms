@@ -1,4 +1,11 @@
 // https://leetcode-cn.com/problems/course-schedule/solution/bao-mu-shi-ti-jie-shou-ba-shou-da-tong-tuo-bu-pai-/
+/*
+    总结：拓扑排序问题
+    根据依赖关系，构建邻接表、入度数组。
+    选取入度为 0 的数据，根据邻接表，减小依赖它的数据的入度。
+    找出入度变为 0 的数据，重复第 2 步。
+    直至所有数据的入度为 0，得到排序，如果还有数据的入度不为 0，说明图中存在环。
+*/
 class Solution {
     // 节点的入度: 使用数组保存每个节点的入度,
     public boolean canFinish(int numCourses, int[][] prerequisites) {
