@@ -1,10 +1,10 @@
 class Solution {
     public int lastStoneWeight(int[] stones) {
-        if(stones.length <= 1){
+        int n = stones.length;
+        
+        if(n <= 1){
             return stones[0];
         }
-        
-        int n = stones.length;
         
         while(true){
             Arrays.sort(stones);
@@ -13,8 +13,7 @@ class Solution {
                 break;
             }
             
-            int r = Math.abs(stones[n-1]-stones[n-2]);
-            stones[n-1] = r;
+            stones[n-1] = Math.abs(stones[n-1] - stones[n-2]);
             stones[n-2] = 0;
         }
         
